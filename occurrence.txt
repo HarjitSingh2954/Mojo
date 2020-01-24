@@ -1,0 +1,20 @@
+ //Finding the duplicates
+    public void getOccurrence(Integer[] a1){
+        Integer key1;
+
+        Map<Integer, Integer> countMap = new Map<Integer, Integer>();
+        for(Integer i = 0; i < a1.size(); i++) {
+            key1 = a1[i];
+                if(countMap.containsKey(key1)) {
+                    Integer count = countMap.get(key1);
+                    count++;
+                    countMap.put(key1,count);
+                }
+                else {
+                    countMap.put(key1,1);
+                }
+        }
+        for(Integer val : countMap.keySet()) {
+                System.debug(countMap.get(val));
+            }
+    }

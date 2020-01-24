@@ -1,0 +1,66 @@
+/*********************************************IMPORTANT*********************************************
+ * Class: ApexSoql
+ * Created by : Tanishaa
+ ---------------------------------------------------------------------------------------------------
+ * Purpose: Class contains simple SOQL Statements
+ ---------------------------------------------------------------------------------------------------
+ * Utility Test Class: CalculatorUtilityTest
+ ---------------------------------------------------------------------------------------------------
+ * Problem Statements:
+    Create an Account Record with Name = “Eternus”. 
+	Create associated contacts. 
+	Create a Custom field called Contact Count on Account. 
+	Query on Contact where Account.Name = “Eternus” and count the associated contacts. 
+	Update the custom field on Accounts with that count.
+***************************************************************************************************/
+
+public with sharing class ApexSoql {
+    
+   //CountContact 
+   public static void countContact() {
+        Account acc = new Account(Name = 'Eternus');
+        insert acc;
+        
+        Contact c1= new Contact(LastName = 'Shinde');
+        c1.AccountId = acc.Id;
+        insert c1;
+        
+        Contact c2= new Contact(LastName = 'Jadhav');
+        c2.AccountId = acc.Id;
+        insert c2;
+        
+        Contact c3= new Contact(LastName = 'Kakade');
+        c3.AccountId = acc.Id;
+        insert c3;
+        
+        Contact c4= new Contact(LastName = 'Sawant');
+        c3.AccountId = acc.Id;
+        insert c4;
+        
+      /* List<AggregateResult> countContact = [SELECT COUNT(LastName) 
+                                       FROM Contact
+                                       WHERE Account.Name='Eternus'];
+        acc.Contact_Count__c = countContact;*/
+       
+        Account a = [SELECT Name
+                    ,(SELECT LastName FROM Contacts)
+                    FROM Account
+                    WHERE Name='Eternus'];
+        a.Contact_Count__c = a.Contacts.size();
+	}
+    
+    //Parent Child Relationship
+    public static void relationship() {
+        List<Contact> records = [SELECT Name
+                                FROM Contact
+                                WHERE Account.Name='Eternus'];
+        for(Contact i: records) {
+            System.debug(i);
+        }
+    }
+}
+
+/*********************************************OutPut*********************************************
+1. ApexSoql.countContact();
+2. ApexSoql.relationship();
+***************************************************************************************************/

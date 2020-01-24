@@ -1,0 +1,47 @@
+/*********************************************IMPORTANT*********************************************
+ * Class: ApexAdvanceConcepts
+ * Created by : 
+ ---------------------------------------------------------------------------------------------------
+ * Purpose: Class contain loops iterate over account records
+ ---------------------------------------------------------------------------------------------------
+ * Utility Test Class: CalculatorUtilityTest
+ ---------------------------------------------------------------------------------------------------
+ * Problem Statements:
+   Query on Account object/ records and show/print each account record using
+ 1. Traditional for loop 
+ 2. Advanced for loop 
+ 3. While loop 
+***************************************************************************************************/
+public with sharing class ApexAdvanceConcepts {
+    
+    //Query on Account object
+	public static void account_record() {
+    	
+        list<Account> accounts=[SELECT Id
+                                ,Name 
+                                FROM Account];
+
+		//Traditional for
+    	System.debug('Traditional for Loop');
+    	for(Integer i=0; i<accounts.size(); i++) {
+        	System.debug('Account Records: '+accounts[i]);
+   		}
+
+        //Advance for
+    	System.debug('Advance Loop');
+    	for(Account acc :accounts) {
+        	System.debug('Account Records:'+acc);
+    	}
+
+        //While 
+		System.debug('While Loop');
+		Integer i = 0;
+   	  	while(i < accounts.size()) { 
+        	System.debug('Account Records:'+accounts[i]);
+    	}
+	}
+}
+
+/*********************************************OutPut*********************************************
+1. ApexAdvanceConcepts.account_record();
+***************************************************************************************************/

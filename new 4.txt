@@ -1,0 +1,54 @@
+/*********************************************IMPORTANT*********************************************
+ * Class: ApexSearchingAlgorithms
+ * Created by : 
+ ---------------------------------------------------------------------------------------------------
+ * Purpose: Class contains searching methods
+ ---------------------------------------------------------------------------------------------------
+ * Utility Test Class: CalculatorUtilityTest
+ ---------------------------------------------------------------------------------------------------
+ * Problem Statements:
+  Implement following Searching algorithm using Apex & Collections
+ 1. Binary Search 
+ 2. Linear Search 
+***************************************************************************************************/
+
+public with sharing class ApexSearchingAlgorithms {
+    
+    public static void Search(List<Integer> integerList, Integer key) {
+		binarySearch(integerList, key, 0, integerList.size());
+	}
+    
+    //Binary Search
+    public static void binarySearch(List<Integer> integerList, Integer key, Integer first, Integer last) {
+        
+        if(last>=first) {
+
+            Integer mid = first+(last-1)/2;
+
+            if(key == integerList.get(mid))
+                System.debug('Element '+integerList.get(mid)+' found at position '+ (mid+1));
+        
+            if(integerList.get(mid)>key)
+                binarySearch(integerList, key, 0, mid-1);
+ 		
+            if(integerList.get(mid)<key)
+  			    binarySearch(integerList, key, mid+1, last-1);
+     	}
+        else
+            System.debug('Element not found'); 
+    }
+
+    //Linear Search
+    public static void linearSearch(List<Integer> integerList, Integer key) {
+        for(Integer i=0; i<integerList.size(); i++) {
+            if(integerList.get(i) == key) {
+            	System.debug('Element '+integerList.get(i)+' found at position '+ (i+1));
+            }
+        }
+    }
+}
+
+/*********************************************OutPut*********************************************
+1. ApexSearchingAlgorithms.search();
+2. ApexSearchingAlgorithms.linearSearch();
+***************************************************************************************************/

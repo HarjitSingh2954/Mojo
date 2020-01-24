@@ -1,0 +1,83 @@
+/*********************************************IMPORTANT*********************************************
+ * Class: ApexSortingAlgorithms
+ * Created by : Tanisha Nagar
+ ---------------------------------------------------------------------------------------------------
+ * Purpose: Class contains sorting methods
+ ---------------------------------------------------------------------------------------------------
+ * Utility Test Class: CalculatorUtilityTest
+ ---------------------------------------------------------------------------------------------------
+ * Problem Statements:
+   Implement any four Sorting algorithm using Apex & Collections
+a. Bubble Sort 
+b. Insertion Sort 
+d. Quick Sort 
+f. Selection Sort  
+***************************************************************************************************/
+
+public with sharing class ApexSortingAlgorithms {
+
+    //Show Array of integer
+    public static void ShowArray(Integer[] numArray) {
+        Integer n = numArray.size(); 
+        System.debug('Sorted Array:');
+        for (Integer i=0; i<n; ++i) {   
+            System.debug(numArray[i] + '');  
+    	}
+	}
+
+    //Bubble Sort
+    public static void bubbleSort(Integer[] numArray) {
+        Integer n = numArray.size(); 
+        for (Integer i = 0; i < n-1; i++) {
+            for (Integer j = 0; j < n-i-1; j++) { 
+                if (numArray[j] > numArray[j+1]) { 
+                    Integer temp = numArray[j]; 
+                    numArray[j] = numArray[j+1]; 
+                    numArray[j+1] = temp; 
+                } 
+            }
+        }
+        System.debug('Bubble Sort');
+        ShowArray(numArray);
+    }
+
+    //Selection Sort
+    public static void selectionSort(Integer[] numArray) {
+        Integer n = numArray.size(); 
+        for (Integer i = 0; i < n-1; i++) { 
+            Integer min_idx = i; 
+            for (Integer j = i+1; j < n; j++) {
+                if (numArray[j] < numArray[min_idx]) 
+                min_idx = j; 
+            }
+            Integer temp = numArray[min_idx]; 
+            numArray[min_idx] = numArray[i]; 
+            numArray[i] = temp; 
+        }
+        System.debug('Selection Sort');
+        ShowArray(numArray);
+    }
+
+    //Insertion Sort
+    public static void insertionSort(List<Integer>numList) {
+        Integer temp;
+        for (Integer i = 1; i < numList.size(); i++) {
+            for(Integer j = i ; j > 0 ; j--) {
+                if(numList[j] < numList[j-1]) {
+                    temp = numList[j];
+                    numList[j] = numList[j-1];
+                    numList[j-1] = temp;
+                }
+            }
+        }
+        System.debug('Insertion Sort');
+        ShowArray(numList);
+    }
+}
+
+/*********************************************OutPut*********************************************
+1. ApexSortingAlgorithms.bubbleSort();
+2. ApexSortingAlgorithms.selectionSort();
+3. ApexSortingAlgorithms.insertionSort();
+4. ApexSortingAlgorithms.bubbleSort();
+***************************************************************************************************/

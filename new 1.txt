@@ -1,0 +1,120 @@
+ //*********************************************IMPORTANT*********************************************
+ * Class: ApexGeneral
+ * Created by : 
+ ---------------------------------------------------------------------------------------------------
+ * Purpose: Class to provide basic number operations
+ ---------------------------------------------------------------------------------------------------
+ * Utility Test Class: CalculatorUtilityTest
+ ---------------------------------------------------------------------------------------------------
+ * Problem Statements:
+ 1. Write a method which will accept integer parameter and build and print array of up to that integer parameter.
+ 2. Method which will accept array of integers as parameters.
+ 3. Sort the array in ascending order
+ 4. Sort the array in descending order
+ 5. Print the Maximum number in the array 
+ 6. Print the Minimum number in the array 
+ 7. Print duplicates and its occurrences in the array.
+ 8. Method which will calculate the simple interest
+***************************************************************************************************/
+
+public with sharing class ApexGeneral {
+   
+   //Method to accept Integer as parameter
+    public static void acceptIntegerParameter(Integer n) {
+        Integer[] num = new Integer[] {};
+    	for(Integer i = 0; i < n; i++) {
+        	num.add(i);
+       	}
+        System.debug('Accepted Integer>>>>>'+num);
+    }
+
+    //Accept array of integer
+    public static List<Integer> acceptArrayOfInteger(Integer[] numArray) {
+        for (Integer i : numArray) {
+        	System.debug(i);
+    	}
+        return numArray;
+    }
+
+     //Show array of integer
+    public static void ShowArray(Integer[] numArray) {
+        Integer n = numArray.size(); 
+        System.debug('Sorted Array:');
+        for (Integer i=0; i<n; ++i) {   
+            System.debug(numArray[i] + '');  
+    	}
+	}
+
+    //Sort array in ascending order
+    public static void sortArrayInAscendingOrder(Integer[] numArray) {
+        Integer n = numArray.size(); 
+        for (Integer i = 0; i < n-1; i++) {
+            for (Integer j = 0; j < n-i-1; j++) { 
+                if (numArray[j] > numArray[j+1]) { 
+                    Integer temp = numArray[j]; 
+                    numArray[j] = numArray[j+1]; 
+                    numArray[j+1] = temp; 
+                } 
+            }
+        }
+        ShowArray(numArray);
+    }
+
+    //Sort array in descending order
+    public static void sortArrayInDescendingOrder(Integer[] numArray) {
+        Integer n = numArray.size(); 
+        for (Integer i = 0; i < n-1; i++) { 
+            Integer max_idx = i; 
+            for (Integer j = i+1; j < n; j++) {
+                if (numArray[j] > numArray[max_idx]) 
+                max_idx = j; 
+            }
+            Integer temp = numArray[max_idx]; 
+            numArray[max_idx] = numArray[i]; 
+            numArray[i] = temp; 
+        }
+        ShowArray(numArray);
+        System.debug('Maximum Number:'+numArray[0]);    //Maximum Number
+        System.debug('Minimum Number:'+numArray[n-1]);  //Minimum Number
+     }
+
+    //Sort number of ocurrences of integer in array
+    public static void occurences(Integer[] newMyInts) {
+        Integer[] dummyarray=new Integer[100];
+            Integer visited=-1;
+        for(Integer i=0; i<newMyInts.size(); i++) {
+            Integer count=1;
+            for(Integer j=i+1; j<newMyInts.size(); j++) {
+                if(newMyInts[i]==newMyInts[j]) {
+                    count++;
+                   dummyarray[j]=visited;
+                }
+            }
+		if(dummyarray[i]!=visited)
+            dummyarray[i]=count;
+        }
+         for(Integer i = 0; i < newMyInts.size(); i++) { 
+           if(dummyarray[i] != visited)  
+                System.debug(' '+ newMyInts[i] + '|' + dummyarray[i]);
+        }  
+	}
+    
+  
+    // Calculate simple interest
+    public static void calcSimpleInterest(Double principal_Value, Double rate_Of_Interest, Double time_Period) {
+        Double simple_Interest=(principal_Value * rate_Of_Interest * time_Period);
+        System.debug(simple_Interest);
+    }
+}
+
+/*********************************************OutPut*********************************************
+1. ApexGeneral.acceptIntegerParameter(9);
+2. List<Integer> num = new List<Integer> {6,2,5,12,8};
+   ApexGeneral.acceptArrayOfInteger(num);
+3. List<Integer> num = new List<Integer> {6,2,5,12,8};
+   ApexGeneral.sortArrayInAscendingOrder(num);
+4. List<Integer> num = new List<Integer> {6,2,5,12,8};
+   ApexGeneral.sortArrayInDescendingOrder(num);
+5. List<Integer> num = new List<Integer> {6,2,5,8,2,5};
+   ApexGeneral.occurences(num);
+***************************************************************************************************/
